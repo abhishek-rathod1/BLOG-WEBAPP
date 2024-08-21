@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Home Page</title>
+    <style>
+      .card-img-top {
+        height: 200px; /* Set a fixed height for the image */
+        object-fit: cover; /* Ensures the image covers the entire area */
+        object-position: center; /* Centers the image within the container */
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/navbar') %>
+    <div class="container mt-3">
+      <div class="row">
+        <% blogs.forEach(blog => { %>
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <div class="card h-100">
+              <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="<%= blog.title %>">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><%= blog.title %></h5>
+                <p class="card-text">
+                  <%= blog.body.length > 100 ? blog.body.substring(0, 100) + '...' : blog.body %>
+                </p>
+                <a href="/blog/<%= blog._id %>" class="btn btn-primary mt-auto">View</a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+    <%- include('./partials/scripts') %>
+  </body>
+</html>
